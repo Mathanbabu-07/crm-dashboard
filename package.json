@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
-    "start": "next start",
+    "dev": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096 --max-semi-space-size=256\" next dev --webpack",
+    "build": "cross-env NODE_OPTIONS=\"--max-old-space-size=4096 --max-semi-space-size=256\" next build --webpack",
+    "start": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next start",
     "lint": "eslint"
   },
   "dependencies": {
@@ -34,6 +34,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "tailwindcss": "^4",

@@ -8,6 +8,10 @@ interface TableFilterState {
   search: string;
   status: string;
   plan?: string;
+  pageIndex: number;
+  pageSize: number;
+  sortBy?: string;
+  sortDesc?: boolean;
 }
 
 interface UiStore {
@@ -24,11 +28,15 @@ const defaultCustomerFilters: TableFilterState = {
   search: "",
   status: "all",
   plan: "all",
+  pageIndex: 0,
+  pageSize: 10,
 };
 
 const defaultOrderFilters: TableFilterState = {
   search: "",
   status: "all",
+  pageIndex: 0,
+  pageSize: 10,
 };
 
 export const useUiStore = create<UiStore>((set) => ({

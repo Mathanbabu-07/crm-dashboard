@@ -3,7 +3,7 @@ import customersData from "@/data/customers.json";
 import kpisData from "@/data/kpis.json";
 import ordersData from "@/data/orders.json";
 import chartDataJson from "@/data/chart.json";
-import type { ActivityItem, Customer, Kpi, Order, ChartData } from "@/lib/types";
+import type { ActivityItem, Customer, Kpi, Order, ChartData, OrderWithCustomer, OrderStatus } from "@/lib/types";
 
 export interface MockApiOptions {
   shouldError?: boolean;
@@ -71,4 +71,43 @@ export async function getChartData(
     chartData.map((data) => ({ ...data })),
     options,
   );
+}
+
+export async function getOrdersWithCustomers(
+  options?: MockApiOptions,
+): Promise<OrderWithCustomer[]> {
+  return withLatency(
+    orders.map((order) => {
+      const customer = customers.find((c) => c.id === order.customerId);
+      return {
+        ...order,
+        customerName: customer?.name || "Unknown Customer",
+        customerEmail: customer?.email || "unknown@example.com",
+      };
+    }),
+    options,
+  );
+}
+
+export async function updateOrderStatus(
+  orderId: string,
+  newStatus: OrderStatus,
+  options?: MockApiOptions,
+): Promise<{ success: boolean }> {
+  // Simulate network latency
+  await new Promise((resolve) => setTimeout(resolve, randomLatency()));
+  if (shouldReject(options)) throw new Error("Failed to update status");
+  
+  // Note: Since this is a mock API using imported JSON, we don't actually mutate the JSON file here.
+  // The UI is expected to do optimistic updates in its own state.
+  return { success: true };
+}
+
+export async function deleteOrder(
+  orderId: string,
+  options?: MockApiOptions,
+): Promise<{ success: boolean }> {
+  await new Promise((resolve) => setTimeout(resolve, randomLatency()));
+  if (shouldReject(options)) throw new Error("Failed to delete order");
+  return { success: true };
 }

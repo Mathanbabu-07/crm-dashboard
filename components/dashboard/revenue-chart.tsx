@@ -70,7 +70,7 @@ export function RevenueChart() {
                 color: isDark ? "#f3f4f6" : "#111827"
               }}
               itemStyle={{ color: color }}
-              formatter={(value: number) => [`$${value.toLocaleString()}`, "Revenue"]}
+              formatter={(value: any) => [`$${Number(value).toLocaleString()}`, "Revenue"]}
             />
             <Area 
               type="monotone" 

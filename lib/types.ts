@@ -25,6 +25,11 @@ export interface Order {
   items: number;
 }
 
+export interface OrderWithCustomer extends Order {
+  customerName: string;
+  customerEmail: string;
+}
+
 export type KpiTrend = "up" | "down" | "neutral";
 
 export interface Kpi {

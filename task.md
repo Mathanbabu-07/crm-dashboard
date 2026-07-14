@@ -1,100 +1,90 @@
-ROLE & CONTEXT
-Continuing work on the "Modern SaaS CRM Dashboard" internship take-home project.
+THIS PROMPT COVERS STEP 5: Settings Page + Final Polish + QA + Documentation + Deployment.
 
-PROJECT CONTEXT:
-Building a production-grade CRM dashboard (not a basic CRUD app). Required pages: Login, Dashboard Home
-(KPIs + charts + activity feed), Customers List (search/sort/filter/pagination), Orders Manager
-(search/filter/edit status/delete), Settings (profile form, theme switcher). No backend — mock data only.
-Fully responsive. Grading rubric emphasizes UI polish, component architecture, state management, UX
-(loading/empty states), code quality.
+TASK PART A: SETTINGS PAGE (app/(dashboard)/settings/)
 
-Tech stack: Next.js (App Router, TypeScript), Tailwind CSS, shadcn/ui, Framer Motion, Zustand,
-React Hook Form + Zod, TanStack Table v8, Recharts/Tremor, lucide-react, next-themes.
+1. Profile form using React Hook Form + the existing Zod settings schema from lib/validators.ts
+   - Fields: name, email, bio (and avatar if the schema supports it — otherwise skip)
+   - Inline validation errors
+   - Load current mock user data as default values on mount
 
-STEPS 1-2 ARE ALREADY DONE:
-- Step 1: Folder structure scaffolded, mock JSON data exists (customers.json, orders.json, kpis.json,
-  activity.json), lib/mock-api.ts has async functions with simulated latency/error states, Zustand stores
-  (auth, ui) exist, Zod schemas for login/settings exist, shared TypeScript types exist in lib/types.ts.
-- Step 2: Tailwind theme tokens (colors, font, radius, shadow) defined. shadcn/ui components installed
-  (button, input, card, table, dropdown-menu, dialog, drawer, badge, switch, tabs, avatar, skeleton,
-  toast, select, checkbox, separator). Persistent app shell built (Sidebar + Topbar + PageShell) and wired
-  into the (dashboard) route group layout. Dark/light theme toggle working via next-themes. Motion system
-  (lib/motion.ts) with page transitions, card hover-lift, list stagger. Shared Skeleton variants and
-  EmptyState component built. Dashboard/Customers/Orders/Settings routes currently show placeholder dummy
-  content inside the real shell — this placeholder content is what you're replacing now for the two pages
-  in this step.
+2. Theme switcher
+   - Reuse the exact same theme toggle logic from the Topbar (Step 2) — surface it here too as a proper
+     settings control (e.g. Light/Dark/System radio group or switch), don't duplicate the underlying logic
 
-THIS PROMPT COVERS ONLY STEP 3: Login Page + Dashboard Home.
-Do not build Customers, Orders, or Settings page logic yet — that's Steps 4-5.
+3. Reset / Save behavior
+   - Reset button: reverts form fields to last-saved values (not just blank)
+   - Save button: validates, "saves" to mock state/localStorage, shows a success toast
+   - Save button should show a brief loading state (reuse the mock-api latency pattern for consistency)
+   - Disable Save if the form is unchanged from last-saved state (dirty-check via React Hook Form)
 
-TASK PART A: LOGIN PAGE (app/(auth)/login/)
+4. Responsive at 375px, consistent with the rest of the app's visual language
 
-1. [x] Build the login form using React Hook Form + the existing Zod login schema from lib/validators.ts
-   - [x] Email field, password field, inline validation error messages (required, valid email format, min
-     password length)
-   - [x] Password visibility toggle (eye/eye-off icon inside the input)
-   - [x] "Remember Me" checkbox
-   - [x] Submit button with a loading state (disabled + spinner while "authenticating")
+TASK PART B: FULL RESPONSIVE + QA PASS
 
-2. [x] Auth flow (mock)
-   - [x] On submit, call authStore.login() with a simulated ~600ms delay (reuse the mock-api latency pattern)
-   - [x] Accept any well-formed email/password combo as valid for this mock (or a hardcoded demo credential —
-     your call, document whichever you choose)
-   - [x] If "Remember Me" is checked, persist session to localStorage; otherwise sessionStorage or in-memory
-     for the tab
-   - [x] On success: redirect to /dashboard. On failure: show an inline error (e.g. toast or form-level error)
-   - [x] Use Framer Motion for the form's entrance (reuse variants from lib/motion.ts)
+1. Manually verify every page (Login, Dashboard, Customers, Orders, Settings) at 375px, 768px, 1024px,
+   1440px — fix any overflow, cramped spacing, or broken layout found
+2. Confirm every async section across the whole app has: a loading skeleton, an empty state where
+   applicable, and doesn't hard-crash on the mock-api's simulated error case
+3. Add a top-level error boundary (app/(dashboard)/error.tsx and/or app/error.tsx) so an unexpected error
+   shows a friendly fallback UI instead of a blank/broken page
+4. Add a not-found page (app/not-found.tsx) styled consistently with the app
+5. Quick accessibility pass: color contrast on badges/text meets reasonable standards, all interactive
+   elements have visible focus states, images/icons have alt text or aria-labels where meaningful
+6. Animation consistency check: nothing janky, nothing overused — subtle and professional throughout
 
-3. [x] Route protection
-   - [x] Any (dashboard) route should redirect unauthenticated users to /login
-   - [x] /login should redirect already-authenticated users straight to /dashboard
-   - [x] Implement this via middleware.ts or a client-side guard in the (dashboard) layout — pick whichever
-     fits Next.js App Router best and explain your choice briefly
+TASK PART C: DOCUMENTATION
 
-4. [x] Visual design
-   - [x] Modern, centered auth card layout (not a bare unstyled form) — use the shadcn Card + Input +
-     Button components and the design tokens from Step 2
-   - [x] Fully responsive down to 375px
+Write a README.md at the project root with these sections:
 
-TASK PART B: DASHBOARD HOME (app/(dashboard)/dashboard/)
+1. Project overview (1-2 sentences on what this is)
+2. Tech stack list
+3. Setup & run instructions:
+git clone <repo-url>
+cd <project-folder>
+npm install
+npm run dev
+   Include Node version requirement if relevant, and how to build for production (npm run build).
+4. Demo login credentials (whatever was used/documented in Step 3)
+5. Folder structure overview (brief, high-level — not a full file tree)
+6. Assumptions & known limitations (be honest: e.g. "no real backend, all data is mocked and resets on
+   refresh unless persisted to localStorage", "auth is client-side only and not secure for production",
+   any features simplified from the original brief)
+7. AI Usage Disclosure section — I will fill in the specifics myself afterward, but scaffold it with these
+   headers so I remember to complete it:
+   - Which AI tools were used
+   - What tasks the AI assisted with (per step, briefly)
+   - What I wrote/decided myself
+   - One technical decision made independently, and why
 
-1. [x] Fetch data from the existing lib/mock-api.ts functions (getKpis, getActivity, and whatever you'll need
-   for chart data — extend mock-api.ts/kpis.json if a chart needs time-series data not already there)
+Do NOT fabricate specific AI-usage claims in this section — leave it as a clearly marked TODO/placeholder
+for me to fill in personally, since this needs to be accurate for the submission.
 
-2. [x] KPI cards (4+): Total Revenue, Active Customers, New Customers (this period), Avg Order Value
-   - [x] Each card: label, current value, trend delta (up/down arrow + %) vs previous period
-   - [x] Use the KPI card Skeleton built in Step 2 while data is loading
-   - [x] Stagger-animate the cards in on load (Step 2 motion variants)
+TASK PART D: DEPLOYMENT
 
-3. [x] Interactive chart(s) — at least one, ideally two:
-   - [x] Revenue trend (line or area chart) and/or Customer growth (bar chart) via Recharts/Tremor
-   - [x] Responsive container, respects light/dark theme colors, has a loading skeleton state
+1. Ensure the project builds cleanly with `npm run build` (fix any type errors, lint errors, or build
+   warnings that surface)
+2. Give me the exact steps to deploy to Vercel (CLI commands and/or dashboard steps) — I'll run the actual
+   deployment myself so I have the live URL under my own account
+3. Confirm there are no hardcoded localhost URLs or dev-only assumptions that would break in production
 
-4. [x] Recent activity feed
-   - [x] List of recent events (new order, new customer, status change, etc.) from activity.json
-   - [x] Each item: icon by type, message, relative timestamp ("2h ago")
-   - [x] Use the activity feed item Skeleton from Step 2, list stagger animation
+TASK PART E: GIT CLEANUP
 
-5. [x] Handle the mock-api's simulated error case for at least one of these sections (e.g. KPIs) — show a
-   retry-able error state, not a crash, to demonstrate real error handling
-
-6. [x] Fully responsive: KPI cards stack/reflow, chart scales down, activity feed remains readable at 375px
-
-7. [/] Git
-   - [ ] One meaningful commit: "feat: login page with auth flow, route protection, and dashboard home"
+1. Review commit history — if there are messy/redundant WIP commits from earlier steps, advise whether to
+   leave them (shows real process) or squash (cleaner log) — grading rubric values "meaningful commits,"
+   so lean toward keeping meaningful ones and only cleaning up genuine noise
+2. Final commit for this step: "feat: settings page, responsive polish, error handling, and documentation"
 
 CONSTRAINTS
-- Do not touch Customers/Orders/Settings pages — leave their Step-2 placeholder content as-is
-- Do not modify the Sidebar/Topbar/PageShell layout code — only build content inside the existing shell
-- Reuse Step 2's Skeleton, EmptyState, and motion variants rather than creating new one-off versions
-- Keep auth fully mock/client-side — no real backend, no real password hashing, just enough to
-  demonstrate the flow and route protection convincingly
+- Do not touch Login, Dashboard Home, Customers, or Orders logic — only fix genuine responsive/QA bugs
+  found in them during Part B, don't refactor working features
+- Don't invent AI usage claims in the README — leave that section as a placeholder for me
+- Don't deploy on my behalf — give me the steps, I'll run it under my own Vercel account so the URL and
+  ownership are correct
 
 DELIVERABLE / OUTPUT
 When done, tell me:
-1. What credential/rule you used for "successful" mock login (so I can test it)
-2. Confirmation route protection works both ways (logged out → bounced to /login, logged in → can't sit
-   on /login)
-3. Confirmation the app builds/runs with `npm run dev` with no errors
-4. Any change you made to mock-api.ts/kpis.json to support the chart data
-5. The exact commit message used
+1. Any responsive/bug fixes made during the QA pass (brief list)
+2. Confirmation `npm run build` succeeds with no errors
+3. The full README.md content
+4. The exact Vercel deployment steps for me to run myself
+5. The exact final commit message used
