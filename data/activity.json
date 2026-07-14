@@ -1,0 +1,62 @@
+[
+  {
+    "id": "act_001",
+    "type": "order_created",
+    "message": "New enterprise order from Northstar Labs for $4,280.",
+    "timestamp": "2026-07-13T15:22:00.000Z"
+  },
+  {
+    "id": "act_002",
+    "type": "order_created",
+    "message": "AtlasOps submitted a pending renewal worth $6,120.",
+    "timestamp": "2026-07-13T12:10:00.000Z"
+  },
+  {
+    "id": "act_003",
+    "type": "plan_upgraded",
+    "message": "SignalStack upgraded their workspace to Enterprise.",
+    "timestamp": "2026-07-12T20:05:00.000Z"
+  },
+  {
+    "id": "act_004",
+    "type": "order_created",
+    "message": "BrightByte started a Free trial from the inbound demo queue.",
+    "timestamp": "2026-07-12T16:30:00.000Z"
+  },
+  {
+    "id": "act_005",
+    "type": "payment_refunded",
+    "message": "Nova Portal received a $1,140 refund for duplicate seats.",
+    "timestamp": "2026-07-11T16:05:00.000Z"
+  },
+  {
+    "id": "act_006",
+    "type": "customer_reactivated",
+    "message": "HeliumDesk reactivated after a customer success review.",
+    "timestamp": "2026-07-10T14:45:00.000Z"
+  },
+  {
+    "id": "act_007",
+    "type": "order_created",
+    "message": "Clearpath HQ completed a $3,960 implementation package.",
+    "timestamp": "2026-07-09T10:15:00.000Z"
+  },
+  {
+    "id": "act_008",
+    "type": "customer_created",
+    "message": "Keystone CRM joined as a new lead from partner referral.",
+    "timestamp": "2026-07-02T09:05:00.000Z"
+  },
+  {
+    "id": "act_009",
+    "type": "order_created",
+    "message": "OrbitDesk renewed nine Enterprise seats for $8,260.",
+    "timestamp": "2026-07-01T13:12:00.000Z"
+  },
+  {
+    "id": "act_010",
+    "type": "customer_created",
+    "message": "MapleWorks entered the pipeline after a product webinar.",
+    "timestamp": "2026-06-29T10:30:00.000Z"
+  }
+]

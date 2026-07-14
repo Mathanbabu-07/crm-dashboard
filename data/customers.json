@@ -1,0 +1,200 @@
+[
+  {
+    "id": "cus_001",
+    "name": "Avery Chen",
+    "email": "avery.chen@northstar.dev",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_001",
+    "company": "Northstar Labs",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-02-14T09:15:00.000Z",
+    "totalSpend": 28420
+  },
+  {
+    "id": "cus_002",
+    "name": "Maya Patel",
+    "email": "maya.patel@finchflow.io",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_002",
+    "company": "Finchflow",
+    "status": "active",
+    "plan": "pro",
+    "createdAt": "2025-03-01T14:40:00.000Z",
+    "totalSpend": 8740
+  },
+  {
+    "id": "cus_003",
+    "name": "Julian Brooks",
+    "email": "julian.brooks@brightbyte.co",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_003",
+    "company": "BrightByte",
+    "status": "lead",
+    "plan": "free",
+    "createdAt": "2026-06-18T11:10:00.000Z",
+    "totalSpend": 0
+  },
+  {
+    "id": "cus_004",
+    "name": "Nora Williams",
+    "email": "nora.williams@atlasops.com",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_004",
+    "company": "AtlasOps",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2024-11-22T16:05:00.000Z",
+    "totalSpend": 36180
+  },
+  {
+    "id": "cus_005",
+    "name": "Ethan Rivera",
+    "email": "ethan.rivera@dockline.app",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_005",
+    "company": "Dockline",
+    "status": "inactive",
+    "plan": "pro",
+    "createdAt": "2025-01-09T08:25:00.000Z",
+    "totalSpend": 5120
+  },
+  {
+    "id": "cus_006",
+    "name": "Leah Johnson",
+    "email": "leah.johnson@pulsemetric.ai",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_006",
+    "company": "PulseMetric",
+    "status": "active",
+    "plan": "pro",
+    "createdAt": "2025-07-28T13:35:00.000Z",
+    "totalSpend": 12660
+  },
+  {
+    "id": "cus_007",
+    "name": "Owen Clarke",
+    "email": "owen.clarke@orbitdesk.com",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_007",
+    "company": "OrbitDesk",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2024-09-30T10:50:00.000Z",
+    "totalSpend": 42110
+  },
+  {
+    "id": "cus_008",
+    "name": "Sofia Martinez",
+    "email": "sofia.martinez@greenledger.io",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_008",
+    "company": "GreenLedger",
+    "status": "active",
+    "plan": "pro",
+    "createdAt": "2025-10-12T12:45:00.000Z",
+    "totalSpend": 6930
+  },
+  {
+    "id": "cus_009",
+    "name": "Caleb Morgan",
+    "email": "caleb.morgan@keystonecrm.com",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_009",
+    "company": "Keystone CRM",
+    "status": "lead",
+    "plan": "free",
+    "createdAt": "2026-07-02T09:05:00.000Z",
+    "totalSpend": 0
+  },
+  {
+    "id": "cus_010",
+    "name": "Priya Nair",
+    "email": "priya.nair@signalstack.dev",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_010",
+    "company": "SignalStack",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-04-18T15:30:00.000Z",
+    "totalSpend": 31590
+  },
+  {
+    "id": "cus_011",
+    "name": "Marcus Lee",
+    "email": "marcus.lee@taskforge.net",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_011",
+    "company": "TaskForge",
+    "status": "inactive",
+    "plan": "free",
+    "createdAt": "2025-08-03T17:20:00.000Z",
+    "totalSpend": 980
+  },
+  {
+    "id": "cus_012",
+    "name": "Hannah Kim",
+    "email": "hannah.kim@cloudcrate.io",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_012",
+    "company": "CloudCrate",
+    "status": "active",
+    "plan": "pro",
+    "createdAt": "2026-01-26T07:55:00.000Z",
+    "totalSpend": 4470
+  },
+  {
+    "id": "cus_013",
+    "name": "Diego Alvarez",
+    "email": "diego.alvarez@novaportal.com",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_013",
+    "company": "Nova Portal",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-06-05T18:15:00.000Z",
+    "totalSpend": 22840
+  },
+  {
+    "id": "cus_014",
+    "name": "Grace Turner",
+    "email": "grace.turner@mapleworks.co",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_014",
+    "company": "MapleWorks",
+    "status": "lead",
+    "plan": "free",
+    "createdAt": "2026-06-29T10:30:00.000Z",
+    "totalSpend": 0
+  },
+  {
+    "id": "cus_015",
+    "name": "Noah Bennett",
+    "email": "noah.bennett@redwoodbi.com",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_015",
+    "company": "Redwood BI",
+    "status": "active",
+    "plan": "pro",
+    "createdAt": "2025-12-08T11:45:00.000Z",
+    "totalSpend": 7920
+  },
+  {
+    "id": "cus_016",
+    "name": "Zara Khan",
+    "email": "zara.khan@heliumdesk.com",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_016",
+    "company": "HeliumDesk",
+    "status": "inactive",
+    "plan": "pro",
+    "createdAt": "2024-12-16T09:00:00.000Z",
+    "totalSpend": 11860
+  },
+  {
+    "id": "cus_017",
+    "name": "Theo Sanders",
+    "email": "theo.sanders@clearpathhq.com",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_017",
+    "company": "Clearpath HQ",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-05-21T14:10:00.000Z",
+    "totalSpend": 19670
+  },
+  {
+    "id": "cus_018",
+    "name": "Isla Foster",
+    "email": "isla.foster@relaygrid.io",
+    "avatarUrl": "https://i.pravatar.cc/150?u=cus_018",
+    "company": "RelayGrid",
+    "status": "active",
+    "plan": "pro",
+    "createdAt": "2026-03-11T16:35:00.000Z",
+    "totalSpend": 2310
+  }
+]

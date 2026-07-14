@@ -1,0 +1,194 @@
+[
+  {
+    "id": "ord_1001",
+    "customerId": "cus_001",
+    "date": "2026-07-13T15:22:00.000Z",
+    "status": "completed",
+    "amount": 4280,
+    "items": 4
+  },
+  {
+    "id": "ord_1002",
+    "customerId": "cus_004",
+    "date": "2026-07-13T12:10:00.000Z",
+    "status": "pending",
+    "amount": 6120,
+    "items": 6
+  },
+  {
+    "id": "ord_1003",
+    "customerId": "cus_002",
+    "date": "2026-07-12T18:45:00.000Z",
+    "status": "completed",
+    "amount": 980,
+    "items": 2
+  },
+  {
+    "id": "ord_1004",
+    "customerId": "cus_007",
+    "date": "2026-07-12T09:30:00.000Z",
+    "status": "completed",
+    "amount": 7350,
+    "items": 8
+  },
+  {
+    "id": "ord_1005",
+    "customerId": "cus_013",
+    "date": "2026-07-11T16:05:00.000Z",
+    "status": "refunded",
+    "amount": 1140,
+    "items": 1
+  },
+  {
+    "id": "ord_1006",
+    "customerId": "cus_006",
+    "date": "2026-07-11T13:48:00.000Z",
+    "status": "completed",
+    "amount": 1620,
+    "items": 3
+  },
+  {
+    "id": "ord_1007",
+    "customerId": "cus_010",
+    "date": "2026-07-10T19:12:00.000Z",
+    "status": "completed",
+    "amount": 5180,
+    "items": 5
+  },
+  {
+    "id": "ord_1008",
+    "customerId": "cus_015",
+    "date": "2026-07-10T08:55:00.000Z",
+    "status": "pending",
+    "amount": 740,
+    "items": 2
+  },
+  {
+    "id": "ord_1009",
+    "customerId": "cus_008",
+    "date": "2026-07-09T11:40:00.000Z",
+    "status": "completed",
+    "amount": 1320,
+    "items": 2
+  },
+  {
+    "id": "ord_1010",
+    "customerId": "cus_017",
+    "date": "2026-07-09T10:15:00.000Z",
+    "status": "completed",
+    "amount": 3960,
+    "items": 4
+  },
+  {
+    "id": "ord_1011",
+    "customerId": "cus_005",
+    "date": "2026-07-08T17:18:00.000Z",
+    "status": "cancelled",
+    "amount": 540,
+    "items": 1
+  },
+  {
+    "id": "ord_1012",
+    "customerId": "cus_012",
+    "date": "2026-07-08T14:24:00.000Z",
+    "status": "completed",
+    "amount": 890,
+    "items": 2
+  },
+  {
+    "id": "ord_1013",
+    "customerId": "cus_016",
+    "date": "2026-07-07T20:05:00.000Z",
+    "status": "completed",
+    "amount": 2160,
+    "items": 3
+  },
+  {
+    "id": "ord_1014",
+    "customerId": "cus_001",
+    "date": "2026-07-07T13:35:00.000Z",
+    "status": "completed",
+    "amount": 3840,
+    "items": 4
+  },
+  {
+    "id": "ord_1015",
+    "customerId": "cus_018",
+    "date": "2026-07-06T09:20:00.000Z",
+    "status": "completed",
+    "amount": 620,
+    "items": 1
+  },
+  {
+    "id": "ord_1016",
+    "customerId": "cus_004",
+    "date": "2026-07-05T16:42:00.000Z",
+    "status": "completed",
+    "amount": 6840,
+    "items": 7
+  },
+  {
+    "id": "ord_1017",
+    "customerId": "cus_010",
+    "date": "2026-07-04T12:18:00.000Z",
+    "status": "refunded",
+    "amount": 1260,
+    "items": 2
+  },
+  {
+    "id": "ord_1018",
+    "customerId": "cus_006",
+    "date": "2026-07-03T15:50:00.000Z",
+    "status": "completed",
+    "amount": 1490,
+    "items": 3
+  },
+  {
+    "id": "ord_1019",
+    "customerId": "cus_013",
+    "date": "2026-07-02T18:30:00.000Z",
+    "status": "completed",
+    "amount": 4720,
+    "items": 5
+  },
+  {
+    "id": "ord_1020",
+    "customerId": "cus_002",
+    "date": "2026-07-02T10:08:00.000Z",
+    "status": "completed",
+    "amount": 1180,
+    "items": 2
+  },
+  {
+    "id": "ord_1021",
+    "customerId": "cus_007",
+    "date": "2026-07-01T13:12:00.000Z",
+    "status": "completed",
+    "amount": 8260,
+    "items": 9
+  },
+  {
+    "id": "ord_1022",
+    "customerId": "cus_015",
+    "date": "2026-07-01T09:45:00.000Z",
+    "status": "completed",
+    "amount": 930,
+    "items": 2
+  },
+  {
+    "id": "ord_1023",
+    "customerId": "cus_008",
+    "date": "2026-06-30T17:15:00.000Z",
+    "status": "completed",
+    "amount": 1110,
+    "items": 2
+  },
+  {
+    "id": "ord_1024",
+    "customerId": "cus_012",
+    "date": "2026-06-29T11:30:00.000Z",
+    "status": "cancelled",
+    "amount": 760,
+    "items": 1
+  }
+]

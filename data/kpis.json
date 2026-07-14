@@ -1,0 +1,34 @@
+[
+  {
+    "id": "total-revenue",
+    "label": "Total Revenue",
+    "value": 176240,
+    "delta": 12.8,
+    "trend": "up",
+    "format": "currency"
+  },
+  {
+    "id": "active-customers",
+    "label": "Active Customers",
+    "value": 12,
+    "delta": 9.1,
+    "trend": "up",
+    "format": "number"
+  },
+  {
+    "id": "new-customers",
+    "label": "New Customers",
+    "value": 3,
+    "delta": 4.6,
+    "trend": "up",
+    "format": "number"
+  },
+  {
+    "id": "avg-order-value",
+    "label": "Avg Order Value",
+    "value": 2817,
+    "delta": -3.4,
+    "trend": "down",
+    "format": "currency"
+  }
+]
