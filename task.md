@@ -11,74 +11,90 @@ Fully responsive. Grading rubric emphasizes UI polish, component architecture, s
 Tech stack: Next.js (App Router, TypeScript), Tailwind CSS, shadcn/ui, Framer Motion, Zustand,
 React Hook Form + Zod, TanStack Table v8, Recharts/Tremor, lucide-react, next-themes.
 
+STEPS 1-2 ARE ALREADY DONE:
+- Step 1: Folder structure scaffolded, mock JSON data exists (customers.json, orders.json, kpis.json,
+  activity.json), lib/mock-api.ts has async functions with simulated latency/error states, Zustand stores
+  (auth, ui) exist, Zod schemas for login/settings exist, shared TypeScript types exist in lib/types.ts.
+- Step 2: Tailwind theme tokens (colors, font, radius, shadow) defined. shadcn/ui components installed
+  (button, input, card, table, dropdown-menu, dialog, drawer, badge, switch, tabs, avatar, skeleton,
+  toast, select, checkbox, separator). Persistent app shell built (Sidebar + Topbar + PageShell) and wired
+  into the (dashboard) route group layout. Dark/light theme toggle working via next-themes. Motion system
+  (lib/motion.ts) with page transitions, card hover-lift, list stagger. Shared Skeleton variants and
+  EmptyState component built. Dashboard/Customers/Orders/Settings routes currently show placeholder dummy
+  content inside the real shell — this placeholder content is what you're replacing now for the two pages
+  in this step.
 
-THIS PROMPT COVERS ONLY STEP 2: Design System & Theming.
-Do not build the actual Login, Dashboard, Customers, Orders, or Settings page content/logic yet — that's
-Steps 3-5. This step is the visual foundation and layout shell only, using placeholder/dummy content
-where a real page would eventually go.
+THIS PROMPT COVERS ONLY STEP 3: Login Page + Dashboard Home.
+Do not build Customers, Orders, or Settings page logic yet — that's Steps 4-5.
 
-TASK: BUILD THE DESIGN SYSTEM & LAYOUT SHELL
+TASK PART A: LOGIN PAGE (app/(auth)/login/)
 
-1. Tailwind theme configuration
-   - Define a color token system: primary, accent, success, warning, danger, neutral scale — for both
-     light and dark mode
-   - Pick a distinctive font pairing (heading + body) via next/font — not the default system font, this
-     needs to look intentional
-   - Define consistent border-radius, shadow, and spacing scale tokens
-   - Explain your color/font choice briefly in the commit message or a short code comment
+1. [x] Build the login form using React Hook Form + the existing Zod login schema from lib/validators.ts
+   - [x] Email field, password field, inline validation error messages (required, valid email format, min
+     password length)
+   - [x] Password visibility toggle (eye/eye-off icon inside the input)
+   - [x] "Remember Me" checkbox
+   - [x] Submit button with a loading state (disabled + spinner while "authenticating")
 
-2. [x] Install/init shadcn/ui components we'll need across the app:
-   button, input, card, table, dropdown-menu, dialog, drawer, badge, switch, tabs, avatar, skeleton,
-   toast (or sonner), select, checkbox, separator
+2. [x] Auth flow (mock)
+   - [x] On submit, call authStore.login() with a simulated ~600ms delay (reuse the mock-api latency pattern)
+   - [x] Accept any well-formed email/password combo as valid for this mock (or a hardcoded demo credential —
+     your call, document whichever you choose)
+   - [x] If "Remember Me" is checked, persist session to localStorage; otherwise sessionStorage or in-memory
+     for the tab
+   - [x] On success: redirect to /dashboard. On failure: show an inline error (e.g. toast or form-level error)
+   - [x] Use Framer Motion for the form's entrance (reuse variants from lib/motion.ts)
 
-3. [x] Build the persistent app shell (components/layout/):
-   - [x] Sidebar: collapsible, nav links to Dashboard, Customers, Orders, Settings (use lucide-react icons),
-     active-route highlighting
-   - [x] Topbar: search input (non-functional placeholder for now), theme toggle button, avatar/profile
-     dropdown menu (mock user)
-   - [x] A PageShell/DashboardLayout wrapper component that wraps sidebar + topbar + content area, responsive
-     (sidebar collapses to a drawer/hamburger on mobile)
-   - [x] Wire this shell into the (dashboard) route group layout.tsx so /dashboard, /customers, /orders,
-     /settings all inherit it automatically
+3. [x] Route protection
+   - [x] Any (dashboard) route should redirect unauthenticated users to /login
+   - [x] /login should redirect already-authenticated users straight to /dashboard
+   - [x] Implement this via middleware.ts or a client-side guard in the (dashboard) layout — pick whichever
+     fits Next.js App Router best and explain your choice briefly
 
-4. [x] Theme switching (next-themes)
-   - [x] Set up ThemeProvider in root layout
-   - [x] Theme toggle button in the topbar (sun/moon icon swap), persists across reload
-   - [x] Verify shadcn components respect dark mode out of the box
+4. [x] Visual design
+   - [x] Modern, centered auth card layout (not a bare unstyled form) — use the shadcn Card + Input +
+     Button components and the design tokens from Step 2
+   - [x] Fully responsive down to 375px
 
-5. [x] Motion system (lib/motion.ts)
-   - [x] Define reusable Framer Motion variants: page fade/slide-in transition, card hover-lift, list stagger
-     children
-   - [x] Apply the page transition at the layout level so every route gets it automatically
-   - [x] Keep it subtle — this is a professional SaaS product, not a flashy landing page
+TASK PART B: DASHBOARD HOME (app/(dashboard)/dashboard/)
 
-6. [x] Shared reusable components (components/shared/)
-   - [x] Skeleton variants for: KPI card, table row, chart block, activity feed item (build these now so
-     Steps 3-5 just import and use them)
-   - [x] EmptyState component: icon + message + optional action button, reusable across customers/orders/
-     activity feed when there's no data or filters return nothing
+1. [x] Fetch data from the existing lib/mock-api.ts functions (getKpis, getActivity, and whatever you'll need
+   for chart data — extend mock-api.ts/kpis.json if a chart needs time-series data not already there)
 
-7. [x] Sanity check page
-   - [x] Temporarily render the sidebar/topbar shell with dummy placeholder cards/text inside each of the 4
-     dashboard routes, just enough to visually confirm the shell, theming, and responsiveness all work
-   - [x] This placeholder content will be replaced by real pages in Steps 3-5, so keep it minimal (don't build
-     real KPI logic here)
+2. [x] KPI cards (4+): Total Revenue, Active Customers, New Customers (this period), Avg Order Value
+   - [x] Each card: label, current value, trend delta (up/down arrow + %) vs previous period
+   - [x] Use the KPI card Skeleton built in Step 2 while data is loading
+   - [x] Stagger-animate the cards in on load (Step 2 motion variants)
 
-8. [x] Git
-   - [x] One meaningful commit at the end: "feat: design system, theming, and app shell layout"
+3. [x] Interactive chart(s) — at least one, ideally two:
+   - [x] Revenue trend (line or area chart) and/or Customer growth (bar chart) via Recharts/Tremor
+   - [x] Responsive container, respects light/dark theme colors, has a loading skeleton state
+
+4. [x] Recent activity feed
+   - [x] List of recent events (new order, new customer, status change, etc.) from activity.json
+   - [x] Each item: icon by type, message, relative timestamp ("2h ago")
+   - [x] Use the activity feed item Skeleton from Step 2, list stagger animation
+
+5. [x] Handle the mock-api's simulated error case for at least one of these sections (e.g. KPIs) — show a
+   retry-able error state, not a crash, to demonstrate real error handling
+
+6. [x] Fully responsive: KPI cards stack/reflow, chart scales down, activity feed remains readable at 375px
+
+7. [/] Git
+   - [ ] One meaningful commit: "feat: login page with auth flow, route protection, and dashboard home"
 
 CONSTRAINTS
-- Do not build real page logic (no real KPI cards with data, no real tables, no real forms) — placeholder
-  content only, just enough to prove the shell/theme/motion system works
-- Do not introduce new libraries beyond what's listed without asking first
-- Keep the sidebar/topbar/theme system fully reusable — Steps 3-5 should never need to touch layout code,
-  only page content inside it
-- Confirm responsiveness at 375px, 768px, 1024px, 1440px before committing
+- Do not touch Customers/Orders/Settings pages — leave their Step-2 placeholder content as-is
+- Do not modify the Sidebar/Topbar/PageShell layout code — only build content inside the existing shell
+- Reuse Step 2's Skeleton, EmptyState, and motion variants rather than creating new one-off versions
+- Keep auth fully mock/client-side — no real backend, no real password hashing, just enough to
+  demonstrate the flow and route protection convincingly
 
 DELIVERABLE / OUTPUT
 When done, tell me:
-1. What color palette and font pairing you chose, and why
-2. Confirmation dark/light toggle works and persists on reload
+1. What credential/rule you used for "successful" mock login (so I can test it)
+2. Confirmation route protection works both ways (logged out → bounced to /login, logged in → can't sit
+   on /login)
 3. Confirmation the app builds/runs with `npm run dev` with no errors
-4. Screenshot description (or actual screenshot if supported) of the shell in both light and dark mode
+4. Any change you made to mock-api.ts/kpis.json to support the chart data
 5. The exact commit message used

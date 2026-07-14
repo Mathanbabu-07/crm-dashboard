@@ -1,0 +1,9 @@
+[
+  { "date": "Jan", "revenue": 14200, "customers": 45 },
+  { "date": "Feb", "revenue": 16500, "customers": 52 },
+  { "date": "Mar", "revenue": 15800, "customers": 48 },
+  { "date": "Apr", "revenue": 18200, "customers": 61 },
+  { "date": "May", "revenue": 21000, "customers": 70 },
+  { "date": "Jun", "revenue": 24500, "customers": 85 },
+  { "date": "Jul", "revenue": 28100, "customers": 94 }
+]

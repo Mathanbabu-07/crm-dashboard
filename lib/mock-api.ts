@@ -2,7 +2,8 @@ import activityData from "@/data/activity.json";
 import customersData from "@/data/customers.json";
 import kpisData from "@/data/kpis.json";
 import ordersData from "@/data/orders.json";
-import type { ActivityItem, Customer, Kpi, Order } from "@/lib/types";
+import chartDataJson from "@/data/chart.json";
+import type { ActivityItem, Customer, Kpi, Order, ChartData } from "@/lib/types";
 
 export interface MockApiOptions {
   shouldError?: boolean;
@@ -13,6 +14,7 @@ const customers = customersData as Customer[];
 const orders = ordersData as Order[];
 const kpis = kpisData as Kpi[];
 const activity = activityData as ActivityItem[];
+const chartData = chartDataJson as ChartData[];
 
 function randomLatency() {
   return Math.floor(Math.random() * 301) + 500;
@@ -58,6 +60,15 @@ export async function getActivity(
 ): Promise<ActivityItem[]> {
   return withLatency(
     activity.map((item) => ({ ...item })),
+    options,
+  );
+}
+
+export async function getChartData(
+  options?: MockApiOptions,
+): Promise<ChartData[]> {
+  return withLatency(
+    chartData.map((data) => ({ ...data })),
     options,
   );
 }

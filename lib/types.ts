@@ -56,3 +56,9 @@ export interface AuthUser {
   email: string;
   role: "admin" | "manager";
 }
+
+export interface ChartData {
+  date: string;
+  revenue: number;
+  customers: number;
+}
