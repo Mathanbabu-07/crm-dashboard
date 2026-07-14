@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRM Dashboard
 
-## Getting Started
+A modern, responsive, and production-grade CRM (Customer Relationship Management) dashboard built for managing SaaS customers and orders. This project features a beautiful UI, optimistic state updates, accessible components, and a fully mocked API layer with simulated latency.
 
-First, run the development server:
+## Tech Stack
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **UI Components:** shadcn/ui & Radix UI
+- **Animations:** Framer Motion
+- **State Management:** Zustand
+- **Forms & Validation:** React Hook Form + Zod
+- **Tables:** TanStack Table v8
+- **Charts:** Recharts
+
+## Setup & Run Instructions
 
 ```bash
+# Clone the repository
+git clone https://github.com/Mathanbabu-07/crm-dashboard.git
+
+# Navigate into the project folder
+cd crm-dashboard
+
+# Install dependencies (Node v18+ required)
+npm install
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To build and run the production-optimized version:
+```bash
+npm run build
+npm run start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Demo Login Credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Any valid email and password (minimum 8 characters) will work for the mock login, for example:
+- **Email:** `demo@example.com`
+- **Password:** `password123`
 
-## Learn More
+## Folder Structure Overview
 
-To learn more about Next.js, take a look at the following resources:
+- `app/`: Next.js App Router layout, page components, and global error boundaries.
+- `components/`: Modular React components.
+  - `ui/`: Raw shadcn/ui primitives.
+  - `layout/`: Topbar, Sidebar, and Page Shell.
+  - `dashboard/`: KPI cards, charts, and activity feeds.
+  - `customers/` & `orders/`: Entity-specific table components and columns.
+  - `shared/`: Generic `DataTable`, badges, empty states, and skeletons.
+- `data/`: Mock JSON data driving the application.
+- `lib/`: Utilities, Zustand stores, Zod validators, TypeScript types, and the Mock API layer.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Assumptions & Known Limitations
+- **No Backend:** All data is fetched from static JSON files using a `mock-api.ts` layer that simulates network latency and random errors. 
+- **Volatile State:** Changes made to orders (like deleting or updating status) are optimistic UI updates handled locally; they will reset if the page is hard-refreshed.
+- **Client-Side Auth:** The login form is for demonstration purposes only. It uses client-side validation and local state, and is not secure for a real production environment.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## AI Usage Disclosure
 
-## Deploy on Vercel
+- **Which AI tools were used:** 
+  - [TODO: Fill this in]
+- **What tasks the AI assisted with (per step, briefly):** 
+  - [TODO: Fill this in]
+- **What I wrote/decided myself:** 
+  - [TODO: Fill this in]
+- **One technical decision made independently, and why:** 
+  - [TODO: Fill this in]
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Vercel Deployment Steps
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push your repository to GitHub, GitLab, or Bitbucket.
+2. Log in to [Vercel](https://vercel.com/) and click **Add New... > Project**.
+3. Import the `crm-dashboard` repository from your Git provider.
+4. Leave all build settings as their defaults (Framework Preset: Next.js, Build Command: `next build`).
+5. Click **Deploy**. Vercel will automatically build and host the application, providing a live `.vercel.app` URL.
+
+*(Note: There are no hardcoded `localhost` environment variables in this project; it will work identically in production on Vercel).*

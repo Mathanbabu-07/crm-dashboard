@@ -16,9 +16,8 @@ const kpis = kpisData as Kpi[];
 const activity = activityData as ActivityItem[];
 const chartData = chartDataJson as ChartData[];
 
-function randomLatency() {
-  return Math.floor(Math.random() * 301) + 500;
-}
+export const randomLatency = (min = 300, max = 1500) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
 function shouldReject(options?: MockApiOptions) {
   return Boolean(options?.shouldError) || Math.random() < (options?.errorRate ?? 0);

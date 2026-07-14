@@ -1,5 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { ProfileForm } from "@/components/settings/profile-form";
+import { ThemeSettings } from "@/components/settings/theme-settings";
+import { Separator } from "@/components/ui/separator";
 
 export default function SettingsPage() {
   return (
@@ -11,18 +13,20 @@ export default function SettingsPage() {
         <Card>
           <CardHeader>
             <CardTitle>Profile</CardTitle>
-            <CardDescription>Manage your public profile and preferences.</CardDescription>
+            <CardDescription>Manage your public profile and bio.</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[100px]" />
-              <Skeleton className="h-10 w-full max-w-md" />
-            </div>
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[100px]" />
-              <Skeleton className="h-10 w-full max-w-md" />
-            </div>
-            <Skeleton className="h-10 w-[100px] mt-6" />
+          <CardContent>
+            <ProfileForm />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Appearance</CardTitle>
+            <CardDescription>Customize the theme of your dashboard.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ThemeSettings />
           </CardContent>
         </Card>
       </div>
