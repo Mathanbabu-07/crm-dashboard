@@ -152,6 +152,7 @@ export function OrdersTable() {
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    autoResetPageIndex: false,
     onSortingChange: setSorting,
     state: {
       sorting,

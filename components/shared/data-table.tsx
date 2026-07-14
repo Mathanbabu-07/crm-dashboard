@@ -69,7 +69,11 @@ export function DataTable<TData, TValue>({
             <TableBody>
               {loading ? (
                 Array.from({ length: skeletonCount }).map((_, i) => (
-                  <TableRowSkeleton key={i} />
+                  <TableRow key={i}>
+                    <TableCell colSpan={columns.length}>
+                      <TableRowSkeleton />
+                    </TableCell>
+                  </TableRow>
                 ))
               ) : table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
