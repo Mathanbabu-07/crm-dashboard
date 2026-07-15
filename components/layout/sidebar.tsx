@@ -6,7 +6,7 @@ import { LayoutDashboard, Users, ShoppingCart, Settings, LogOut } from "lucide-r
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-const navItems = [
+export const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Customers", href: "/customers", icon: Users },
   { name: "Orders", href: "/orders", icon: ShoppingCart },
@@ -17,7 +17,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 border-r bg-sidebar flex flex-col h-full text-sidebar-foreground">
+    <aside className="hidden md:flex w-64 border-r bg-sidebar flex-col h-full text-sidebar-foreground shrink-0">
       <div className="h-16 flex items-center px-6 border-b border-sidebar-border">
         <h1 className="text-xl font-bold tracking-tight text-sidebar-primary">CRM Pro</h1>
       </div>

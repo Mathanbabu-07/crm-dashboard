@@ -13,24 +13,70 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle } from "@/components/ui/drawer";
+import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
+import { navItems } from "./sidebar";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export function Topbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   return (
-    <header className="h-16 border-b bg-background flex items-center justify-between px-6 shrink-0">
+    <header className="h-16 border-b bg-background flex items-center justify-between px-4 md:px-6 shrink-0 gap-2 md:gap-4">
+      <div className="flex items-center gap-2 md:hidden">
+        <Drawer direction="left" open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+          <DrawerTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle Menu</span>
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent className="w-64 h-full rounded-none">
+            <DrawerTitle className="sr-only">Navigation Menu</DrawerTitle>
+            <div className="h-16 flex items-center px-6 border-b">
+              <h1 className="text-xl font-bold tracking-tight text-primary">CRM Pro</h1>
+            </div>
+            <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+              {navItems.map((item) => {
+                const isActive = pathname.startsWith(item.href);
+                return (
+                  <Link key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                    <Button
+                      variant={isActive ? "secondary" : "ghost"}
+                      className={cn(
+                        "w-full justify-start transition-colors group",
+                        isActive
+                          ? "bg-secondary text-secondary-foreground"
+                          : "text-foreground/80 hover:text-foreground"
+                      )}
+                    >
+                      <item.icon className="mr-2 h-4 w-4 transition-transform group-hover:animate-shake origin-center" />
+                      {item.name}
+                    </Button>
+                  </Link>
+                );
+              })}
+            </nav>
+          </DrawerContent>
+        </Drawer>
+      </div>
+
       <div className="flex-1 flex items-center">
-        <div className="relative w-96 max-w-full">
+        <div className="relative w-full max-w-[200px] md:max-w-96">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search across CRM..."
+            placeholder="Search..."
             className="w-full bg-muted/50 pl-9 border-none focus-visible:ring-1 focus-visible:bg-background"
           />
         </div>
