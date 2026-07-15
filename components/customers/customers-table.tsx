@@ -11,6 +11,7 @@ import {
   ColumnFiltersState,
 } from "@tanstack/react-table";
 import { customerColumns } from "./customer-columns";
+import { CustomerDrawer } from "./customer-drawer";
 import { DataTable } from "@/components/shared/data-table";
 import { getCustomers } from "@/lib/mock-api";
 import { Customer } from "@/lib/types";
@@ -25,16 +26,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-} from "@/components/ui/drawer";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { StatusBadge } from "@/components/shared/status-badge";
-import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 
 // Simple debounce hook for local use if we don't have one
@@ -224,64 +215,11 @@ export function CustomersTable() {
         }}
       />
 
-      <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
-        <DrawerContent>
-          {selectedCustomer && (
-            <div className="mx-auto w-full max-w-sm">
-              <DrawerHeader className="text-center">
-                <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-muted">
-                  <Avatar className="h-24 w-24">
-                    <AvatarImage src={selectedCustomer.avatarUrl} alt={selectedCustomer.name} />
-                    <AvatarFallback className="text-2xl">{selectedCustomer.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                </div>
-                <DrawerTitle className="text-2xl">{selectedCustomer.name}</DrawerTitle>
-                <DrawerDescription>{selectedCustomer.email}</DrawerDescription>
-              </DrawerHeader>
-              
-              <div className="p-4 pb-0">
-                <div className="flex justify-center gap-3 mb-6">
-                  <StatusBadge status={selectedCustomer.status} />
-                  <StatusBadge status={selectedCustomer.plan} />
-                </div>
-                
-                <Separator className="my-4" />
-                
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex flex-col gap-1">
-                    <span className="text-muted-foreground">Company</span>
-                    <span className="font-medium">{selectedCustomer.company}</span>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-muted-foreground">Customer Since</span>
-                    <span className="font-medium">
-                      {new Date(selectedCustomer.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-muted-foreground">Total Spend</span>
-                    <span className="font-medium">
-                      {new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(selectedCustomer.totalSpend)}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="text-muted-foreground">Customer ID</span>
-                    <span className="font-medium font-mono text-xs truncate" title={selectedCustomer.id}>
-                      {selectedCustomer.id}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-4 mt-6">
-                <Button className="w-full" onClick={() => setDrawerOpen(false)}>Close</Button>
-              </div>
-            </div>
-          )}
-        </DrawerContent>
-      </Drawer>
+      <CustomerDrawer 
+        customer={selectedCustomer} 
+        open={drawerOpen} 
+        onOpenChange={setDrawerOpen} 
+      />
     </div>
   );
 }

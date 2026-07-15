@@ -6,6 +6,19 @@ interface StatusBadgeProps {
   className?: string;
 }
 
+export const STATUS_COLORS = {
+  active: "#10b981", // emerald-500
+  completed: "#10b981",
+  pending: "#f59e0b", // amber-500
+  lead: "#f59e0b",
+  inactive: "#f43f5e", // rose-500
+  cancelled: "#f43f5e",
+  refunded: "#f43f5e",
+  pro: "#3b82f6", // blue-500
+  enterprise: "#a855f7", // purple-500
+  free: "#64748b", // slate-500
+};
+
 export function StatusBadge({ status, className }: StatusBadgeProps) {
   if (!status) return null;
 

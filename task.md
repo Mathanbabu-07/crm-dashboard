@@ -1,90 +1,99 @@
-THIS PROMPT COVERS STEP 5: Settings Page + Final Polish + QA + Documentation + Deployment.
+ROLE & CONTEXT
+Continuing work on the "Modern SaaS CRM Dashboard" internship take-home project. All 5 required pages
+plus a bonus Home page are complete. This prompt only ADDS visualization depth to the existing Dashboard
+page — no new pages, no new KPI cards.
 
-TASK PART A: SETTINGS PAGE (app/(dashboard)/settings/)
 
-1. Profile form using React Hook Form + the existing Zod settings schema from lib/validators.ts
-   - Fields: name, email, bio (and avatar if the schema supports it — otherwise skip)
-   - Inline validation errors
-   - Load current mock user data as default values on mount
+THIS PROMPT: ADD 3 NEW CHART BLOCKS TO DASHBOARD
 
-2. Theme switcher
-   - Reuse the exact same theme toggle logic from the Topbar (Step 2) — surface it here too as a proper
-     settings control (e.g. Light/Dark/System radio group or switch), don't duplicate the underlying logic
+1. Layout change (app/(dashboard)/dashboard/)
+   - Keep Revenue Trend in its current position/size (left, large)
+   - Below Revenue Trend, add a responsive grid for the 3 new chart blocks (e.g. 3-column on desktop,
+     stacking to 1-column on mobile)
+   - Recent Activity feed stays anchored right, spanning the full height of Revenue Trend + the new grid
+     combined (so the right column reads as one tall card next to a taller left column) — if that's
+     awkward with your current grid implementation, keep Activity Feed at its current height/position
+     instead and just add the new charts below the full-width row; use your judgment on whichever reads
+     cleaner, but don't shrink or restyle Activity Feed itself
 
-3. Reset / Save behavior
-   - Reset button: reverts form fields to last-saved values (not just blank)
-   - Save button: validates, "saves" to mock state/localStorage, shows a success toast
-   - Save button should show a brief loading state (reuse the mock-api latency pattern for consistency)
-   - Disable Save if the form is unchanged from last-saved state (dirty-check via React Hook Form)
+2. Chart 1 — Customer Growth (bar chart)
+   - Data: derive client-side from getCustomers() — group customers by the month of their createdAt
+     field, count new customers per month (last 6 months)
+   - Bar chart via Recharts, primary indigo/purple accent color, themed axis/gridline colors (see step 6)
+   - Tooltip on hover shows exact count + month
+   - Card title: "Customer Growth"
 
-4. Responsive at 375px, consistent with the rest of the app's visual language
+3. Chart 2 — Orders by Status (donut/pie chart)
+   - Data: derive client-side from getOrders() — count orders grouped by status
+     (pending/completed/cancelled/refunded)
+   - Donut chart via Recharts (PieChart with innerRadius), each segment colored using the EXACT same
+     color tokens as the status badges already used on the Orders page (pull these from wherever that
+     badge color mapping is defined — reuse it, don't redefine a second color mapping)
+   - Legend below or beside the donut showing status label + count
+   - Tooltip on hover shows status + count + percentage
+   - Click a segment -> navigate to /orders with the status filter pre-applied (reuse the existing Orders
+     page filter-state mechanism, same pattern used for Home's "Pending Renewals" stat click-through if
+     that exists, otherwise just set the appropriate filter state/query param Orders already reads)
+   - Card title: "Orders by Status"
 
-TASK PART B: FULL RESPONSIVE + QA PASS
+4. Chart 3 — Top Customers (mini leaderboard, not a full chart)
+   - Data: derive client-side from getCustomers() — sort by totalSpend descending, take top 5
+   - Render as a compact ranked list: rank number, avatar, name, totalSpend (formatted currency), maybe a
+     tiny inline horizontal bar showing relative spend vs the #1 customer
+   - Click a row -> opens that customer's detail drawer (reuse the existing Customers detail drawer
+     component/logic — this is the one small cross-link mentioned above; import and reuse, don't rebuild)
+   - Card title: "Top Customers"
 
-1. Manually verify every page (Login, Dashboard, Customers, Orders, Settings) at 375px, 768px, 1024px,
-   1440px — fix any overflow, cramped spacing, or broken layout found
-2. Confirm every async section across the whole app has: a loading skeleton, an empty state where
-   applicable, and doesn't hard-crash on the mock-api's simulated error case
-3. Add a top-level error boundary (app/(dashboard)/error.tsx and/or app/error.tsx) so an unexpected error
-   shows a friendly fallback UI instead of a blank/broken page
-4. Add a not-found page (app/not-found.tsx) styled consistently with the app
-5. Quick accessibility pass: color contrast on badges/text meets reasonable standards, all interactive
-   elements have visible focus states, images/icons have alt text or aria-labels where meaningful
-6. Animation consistency check: nothing janky, nothing overused — subtle and professional throughout
+5. Shared chart card wrapper
+   - Build one small reusable ChartCard component (components/dashboard/) — title + content slot +
+     consistent card styling — used by all 3 new blocks so they're visually uniform and don't each
+     hand-roll their own card shell
 
-TASK PART C: DOCUMENTATION
+6. Dark/light mode — IMPORTANT, this is where Recharts commonly breaks
+   - Explicitly set axis text color, gridline stroke, and tooltip background/border/text color per theme
+     (read the current theme via next-themes' useTheme or existing theme state, don't rely on Recharts
+     defaults which will look wrong on dark backgrounds)
+   - Donut segment colors should come from the status color tokens (already theme-aware if defined via
+     Tailwind CSS variables) — verify they still read clearly on dark surfaces, adjust opacity/saturation
+     if a color washes out
+   - Verify Top Customers' avatar/text/mini-bar all look correct in both modes
 
-Write a README.md at the project root with these sections:
+7. Loading / empty / error states
+   - Each of the 3 new charts gets a loading skeleton — reuse the Step 2 Skeleton component (a chart-
+     shaped skeleton variant, same one Revenue Trend already uses if applicable), not a new one-off
+   - If derived data is empty (e.g. no orders yet), show the existing EmptyState component scaled to fit
+     the chart card size
+   - Respect mock-api's existing simulated latency when fetching the underlying getCustomers()/
+     getOrders() calls these charts depend on
 
-1. Project overview (1-2 sentences on what this is)
-2. Tech stack list
-3. Setup & run instructions:
-git clone <repo-url>
-cd <project-folder>
-npm install
-npm run dev
-   Include Node version requirement if relevant, and how to build for production (npm run build).
-4. Demo login credentials (whatever was used/documented in Step 3)
-5. Folder structure overview (brief, high-level — not a full file tree)
-6. Assumptions & known limitations (be honest: e.g. "no real backend, all data is mocked and resets on
-   refresh unless persisted to localStorage", "auth is client-side only and not secure for production",
-   any features simplified from the original brief)
-7. AI Usage Disclosure section — I will fill in the specifics myself afterward, but scaffold it with these
-   headers so I remember to complete it:
-   - Which AI tools were used
-   - What tasks the AI assisted with (per step, briefly)
-   - What I wrote/decided myself
-   - One technical decision made independently, and why
+8. Responsive
+   - New chart grid stacks to single column on mobile (375px), each chart remains readable (donut legend
+     wraps, bar chart labels don't overlap, Top Customers rows stay legible)
+   - Verify at 375px, 768px, 1024px, 1440px
 
-Do NOT fabricate specific AI-usage claims in this section — leave it as a clearly marked TODO/placeholder
-for me to fill in personally, since this needs to be accurate for the submission.
+9. Animation
+   - Stagger-animate the 3 new chart cards in on mount, consistent with existing motion variants
+     (lib/motion.ts) — don't invent new animation timing/easing
 
-TASK PART D: DEPLOYMENT
-
-1. Ensure the project builds cleanly with `npm run build` (fix any type errors, lint errors, or build
-   warnings that surface)
-2. Give me the exact steps to deploy to Vercel (CLI commands and/or dashboard steps) — I'll run the actual
-   deployment myself so I have the live URL under my own account
-3. Confirm there are no hardcoded localhost URLs or dev-only assumptions that would break in production
-
-TASK PART E: GIT CLEANUP
-
-1. Review commit history — if there are messy/redundant WIP commits from earlier steps, advise whether to
-   leave them (shows real process) or squash (cleaner log) — grading rubric values "meaningful commits,"
-   so lean toward keeping meaningful ones and only cleaning up genuine noise
-2. Final commit for this step: "feat: settings page, responsive polish, error handling, and documentation"
+10. Git
+    - One commit: "feat: add customer growth, orders-by-status, and top customers charts to dashboard"
 
 CONSTRAINTS
-- Do not touch Login, Dashboard Home, Customers, or Orders logic — only fix genuine responsive/QA bugs
-  found in them during Part B, don't refactor working features
-- Don't invent AI usage claims in the README — leave that section as a placeholder for me
-- Don't deploy on my behalf — give me the steps, I'll run it under my own Vercel account so the URL and
-  ownership are correct
+- Do not add new KPI cards to the top row
+- Do not modify the existing Revenue Trend chart or Recent Activity feed beyond layout repositioning
+  described in step 1
+- Do not introduce new chart libraries — use whatever library the existing Revenue Trend chart already
+  uses, for visual/API consistency
+- Reuse existing status color tokens for the donut chart rather than defining new colors
+- Reuse the existing Customers detail drawer for Top Customers click-through rather than building a
+  second drawer
 
 DELIVERABLE / OUTPUT
 When done, tell me:
-1. Any responsive/bug fixes made during the QA pass (brief list)
-2. Confirmation `npm run build` succeeds with no errors
-3. The full README.md content
-4. The exact Vercel deployment steps for me to run myself
-5. The exact final commit message used
+1. Confirmation the Orders-by-Status donut colors exactly match the badge colors used on the Orders page
+2. Confirmation all 3 new charts render correctly and legibly in both dark and light mode (axis/gridline/
+   tooltip colors specifically)
+3. Confirmation the app builds/runs with `npm run dev` with no errors
+4. Whether Recent Activity's layout/height needed adjustment to accommodate the new grid, and what you
+   did
+5. The exact commit message used
