@@ -19,9 +19,7 @@ export function KpiCards() {
     setLoading(true);
     setError(false);
     try {
-      // Intentionally simulating an error case for demonstration 
-      // by passing errorRate of 0.3 (30% chance to fail)
-      const data = await getKpis({ errorRate: 0.3 });
+      const data = await getKpis();
       setKpis(data);
     } catch (err) {
       setError(true);
