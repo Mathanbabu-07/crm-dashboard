@@ -19,33 +19,31 @@ export default function DashboardPage() {
       <KpiCards />
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col gap-4">
-          <div className="h-[400px]">
-            <RevenueChart />
-          </div>
-          
-          <motion.div 
-            variants={staggerChildren}
-            initial="initial"
-            animate="animate"
-            className="grid grid-cols-1 md:grid-cols-3 gap-4"
-          >
-            <motion.div variants={listItem} className="h-[350px]">
-              <CustomerGrowth />
-            </motion.div>
-            <motion.div variants={listItem} className="h-[350px]">
-              <OrdersByStatus />
-            </motion.div>
-            <motion.div variants={listItem} className="h-[350px]">
-              <TopCustomers />
-            </motion.div>
-          </motion.div>
+        <div className="col-span-1 md:col-span-2 lg:col-span-4 h-[400px]">
+          <RevenueChart />
         </div>
         
-        <div className="col-span-1 md:col-span-2 lg:col-span-3">
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 h-[400px]">
           <ActivityFeed />
         </div>
       </div>
+
+      <motion.div 
+        variants={staggerChildren}
+        initial="initial"
+        animate="animate"
+        className="grid grid-cols-1 md:grid-cols-3 gap-4"
+      >
+        <motion.div variants={listItem} className="h-[350px]">
+          <CustomerGrowth />
+        </motion.div>
+        <motion.div variants={listItem} className="h-[350px]">
+          <OrdersByStatus />
+        </motion.div>
+        <motion.div variants={listItem} className="h-[350px]">
+          <TopCustomers />
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
