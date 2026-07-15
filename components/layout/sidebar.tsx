@@ -29,13 +29,13 @@ export function Sidebar() {
               <Button
                 variant={isActive ? "secondary" : "ghost"}
                 className={cn(
-                  "w-full justify-start transition-colors",
+                  "w-full justify-start transition-colors group",
                   isActive
                     ? "bg-sidebar-accent text-sidebar-accent-foreground hover:bg-sidebar-accent/90"
                     : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80 hover:text-sidebar-foreground"
                 )}
               >
-                <item.icon className="mr-2 h-4 w-4" />
+                <item.icon className="mr-2 h-4 w-4 transition-transform group-hover:animate-shake origin-center" />
                 {item.name}
               </Button>
             </Link>
@@ -43,8 +43,8 @@ export function Sidebar() {
         })}
       </nav>
       <div className="p-4 border-t border-sidebar-border">
-        <Button variant="ghost" className="w-full justify-start text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent/50">
-          <LogOut className="mr-2 h-4 w-4" />
+        <Button variant="ghost" className="w-full justify-start text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent/50 group">
+          <LogOut className="mr-2 h-4 w-4 transition-transform group-hover:animate-shake origin-center" />
           Log out
         </Button>
       </div>
