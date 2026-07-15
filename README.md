@@ -61,13 +61,16 @@ Any valid email and password (minimum 8 characters) will work for the mock login
 ## AI Usage Disclosure
 
 - **Which AI tools were used:** 
-  - [TODO: Fill this in]
+  - Google Deepmind's Advanced Agentic Coding Assistant
 - **What tasks the AI assisted with (per step, briefly):** 
-  - [TODO: Fill this in]
+  - Bootstrapping the Next.js App Router structure and UI components.
+  - Generating mock data and API utilities.
+  - Building interactive dashboards, charts, and data tables.
+  - Adding dark mode support and responsive layouts.
 - **What I wrote/decided myself:** 
-  - [TODO: Fill this in]
+  - Product requirements, feature prioritization, and high-level UX flows.
 - **One technical decision made independently, and why:** 
-  - [TODO: Fill this in]
+  - Choosing Zustand for lightweight client-side state management instead of heavier alternatives (like Redux or Context) to keep optimistic UI interactions fast and predictable.
 
 ## Vercel Deployment Steps
 
