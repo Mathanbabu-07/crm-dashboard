@@ -134,7 +134,8 @@ export function OrdersByStatus() {
           <Tooltip content={renderTooltip} />
           <Legend 
             verticalAlign="bottom" 
-            height={36}
+            height={60}
+            wrapperStyle={{ paddingTop: "10px" }}
             formatter={(value, entry: any) => {
               const item = data.find(d => d.name === value);
               return <span style={{ color: isDark ? "#9ca3af" : "#4b5563" }}>{value} ({item?.value})</span>;

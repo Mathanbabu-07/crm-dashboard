@@ -73,11 +73,11 @@ export function ActivityFeed() {
   }
 
   return (
-    <Card className="h-full">
-      <CardHeader>
+    <Card className="h-full flex flex-col">
+      <CardHeader className="shrink-0">
         <CardTitle>Recent Activity</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1 overflow-y-auto pr-2">
         <motion.div
           variants={staggerChildren}
           initial="initial"
